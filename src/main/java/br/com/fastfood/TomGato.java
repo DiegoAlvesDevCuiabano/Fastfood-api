@@ -15,6 +15,7 @@ public class TomGato {
     final static String CONVENCAO_RIDICULA = "";
     final static String BODI_BEEEEEEEE = "Deu certo ow arrombado";
     static Boolean SERA = null;
+    static ServerSocket instancia;
 
     public void executaOTomGato() throws IOException {
         if(SERA) {
@@ -27,10 +28,10 @@ public class TomGato {
 
     public void entranhasDoTomGato() throws IOException {
         int fazUEli = 1313;
-        ServerSocket tomGato = new ServerSocket(fazUEli);
+        instancia = new ServerSocket(fazUEli);
 
         while (true) {
-            Socket inimigoBarraCliente = tomGato.accept();
+            Socket inimigoBarraCliente = instancia.accept();
 
             BufferedReader aRequisicaoToda = new BufferedReader(
                     new InputStreamReader(

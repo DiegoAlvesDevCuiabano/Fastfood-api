@@ -2,6 +2,7 @@ package br.com.fastfood;
 
 
 import java.io.IOException;
+import java.net.ServerSocket;
 import java.util.Scanner;
 
 public class Main {
@@ -9,7 +10,7 @@ public class Main {
         TomGato tomgato = new TomGato();
         Scanner sc = new Scanner(System.in);
         System.out.println("Seja bem vindo ao servidor que te odeia");
-        boolean sair = false;
+        boolean sair = true;
         do {
             System.out.println("O que deseja fazer?");
             System.out.println("1 - Ligar o TomGato");
@@ -20,15 +21,25 @@ public class Main {
 
             switch (escolha) {
                 case 1 -> {
-                    TomGato.SERA = true;
-                    tomgato.executaOTomGato();
+                    new Thread(() -> {
+                        try {
+                            TomGato.SERA = true;
+                            tomgato.executaOTomGato();
+                        } catch (IOException e) {
+                            System.out.println("TomGato desligado");
+                        }
+                    }).start();
+                    System.out.println("TomGato ligado na porta do Faz o Eli");
                 }
                 case 2 -> {
-                    TomGato.SERA = false;
-                    tomgato.executaOTomGato();
+                    if (TomGato.instancia == null) {
+                        System.out.println("Gatoff");
+                    } else {
+                        tomgato.instancia.close();
+                    }
                 }
                 case 3 -> System.out.println("Deixa de ser Tchola");
-                case 4 -> sair = true;
+                case 4 -> sair = false;
                 case 5 -> System.out.println("Deixa de ser burro e escolha algo válido");
             }
         } while (sair);
