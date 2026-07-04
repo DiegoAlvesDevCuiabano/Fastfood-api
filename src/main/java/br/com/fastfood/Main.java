@@ -10,7 +10,7 @@ public class Main {
         TomGato tomgato = new TomGato();
         Scanner sc = new Scanner(System.in);
         System.out.println("Seja bem vindo ao servidor que te odeia");
-        boolean sair = true;
+        boolean rodando = true;
         do {
             System.out.println("O que deseja fazer?");
             System.out.println("1 - Ligar o TomGato");
@@ -39,9 +39,9 @@ public class Main {
                     }
                 }
                 case 3 -> System.out.println("Deixa de ser Tchola");
-                case 4 -> sair = false;
+                case 4 -> rodando = false;
                 case 5 -> System.out.println("Deixa de ser burro e escolha algo válido");
             }
-        } while (sair);
+        } while (rodando);
     }
 }

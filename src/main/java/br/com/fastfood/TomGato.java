@@ -16,6 +16,7 @@ public class TomGato {
     final static String BODI_BEEEEEEEE = "Deu certo ow arrombado";
     static Boolean SERA = null;
     static ServerSocket instancia;
+    Requisicao requisicao;
 
     public void executaOTomGato() throws IOException {
         if(SERA) {
@@ -33,15 +34,9 @@ public class TomGato {
         while (true) {
             Socket inimigoBarraCliente = instancia.accept();
 
-            BufferedReader aRequisicaoToda = new BufferedReader(
-                    new InputStreamReader(
-                            inimigoBarraCliente.getInputStream()));
-
-            String restoDaRequisicao;
-
-            while ((restoDaRequisicao = aRequisicaoToda.readLine()) != null && !restoDaRequisicao.isEmpty()) {
-                System.out.println("Header: " + restoDaRequisicao);
-            }
+            Requisicao req = new Requisicao();
+            req.trabalhaRequisicao(inimigoBarraCliente);
+            System.out.println(req);
 
             PrintWriter respostaDesaforada = new PrintWriter(inimigoBarraCliente.getOutputStream(), true);
 
@@ -55,4 +50,6 @@ public class TomGato {
 
         }
     }
+
+
 }
